@@ -95,7 +95,7 @@ body {
 
 .animate-drop {
   animation: dropDown 0.5s ease forwards;
-  opacity: 1; /* Initially hidden *//
+  opacity: 1; /* Initially hidden */
 }
 
 
