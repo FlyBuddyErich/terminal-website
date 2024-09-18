@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Ascii from './Components/Ascii/Ascii';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   const userInputRef = useRef(null);
@@ -149,9 +150,9 @@ function App() {
         }));
         setOutputContent(prev => {
           const newContent = [...prev];
-          newContent[newContent.length - 1] = { 
-            type: 'response', 
-            content: typingEffect.text.slice(0, typingEffect.index + 1) 
+          newContent[newContent.length - 1] = {
+            type: 'response',
+            content: typingEffect.text.slice(0, typingEffect.index + 1)
           };
           return newContent;
         });
@@ -168,43 +169,47 @@ function App() {
 
   return (
     <>
-      <div className={`terminal-window ${isGlitching ? 'glitch' : ''}`}>
-        <div className="scanline"></div>
-        <div className="crt-overlay"></div>
-        <div className="terminal-header">
-          <div className="button red"></div>
-          <div className="button yellow"></div>
-          <div className="button green"></div>
-        </div>
-        <div className="ascii-art">
-          <Ascii />
-        </div>
-        <div className={`terminal-body ${clearAnimation ? 'clear-animation' : ''} ${isGlitching ? 'glitch-text' : ''}`} ref={terminalBodyRef}>
-          <p>Write <span>help</span> to see all commands</p>
-          {stopwatch.isRunning && (
-            <div className="stopwatch">
-              Stopwatch: {formatTime(stopwatch.elapsedTime)}
+      <Routes>
+        <Route path="/" element={
+          <div className={`terminal-window ${isGlitching ? 'glitch' : ''}`}>
+            <div className="scanline"></div>
+            <div className="crt-overlay"></div>
+            <div className="terminal-header">
+              <div className="button red"></div>
+              <div className="button yellow"></div>
+              <div className="button green"></div>
             </div>
-          )}
-          <div className="output" ref={outputRef}>
-            {outputContent.map((item, index) => (
-              <div key={index} className={item.type === 'command' ? 'command-line' : 'response-line'}>
-                {item.type === 'command' ? `user@signal.terminal:~$ ${item.content}` : item.content}
+            <div className="ascii-art">
+              <Ascii />
+            </div>
+            <div className={`terminal-body ${clearAnimation ? 'clear-animation' : ''} ${isGlitching ? 'glitch-text' : ''}`} ref={terminalBodyRef}>
+              <p>Write <span>help</span> to see all commands</p>
+              {stopwatch.isRunning && (
+                <div className="stopwatch">
+                  Stopwatch: {formatTime(stopwatch.elapsedTime)}
+                </div>
+              )}
+              <div className="output" ref={outputRef}>
+                {outputContent.map((item, index) => (
+                  <div key={index} className={item.type === 'command' ? 'command-line' : 'response-line'}>
+                    {item.type === 'command' ? `user@signal.terminal:~$ ${item.content}` : item.content}
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="command-line">
+                <span> user@signal.terminal:~$ </span>
+                <input
+                  type="text"
+                  id="userInput"
+                  autoComplete="off"
+                  ref={userInputRef}
+                  onKeyDown={handleKeyDown}
+                />
+              </div>
+            </div>
           </div>
-          <div className="command-line">
-            <span> user@signal.terminal:~$ </span>
-            <input
-              type="text"
-              id="userInput"
-              autoComplete="off"
-              ref={userInputRef}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
-        </div>
-      </div>
+        } />
+      </Routes>
     </>
   );
 }
