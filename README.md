@@ -1,8 +1,8 @@
-# React + Vite
+# Hey✋
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a terminal website that i did for about 4-5 hours.
+Use commands to see what will happen, have fun. 
 
-Currently, two official plugins are available:
+In this project i used [React ASCII Text](https://github.com/samuelweckstrom/react-ascii-text) by samuelweckstrom.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Was created by using VITE + REACT. 
